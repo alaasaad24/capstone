@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask JSON Example</title>
+</head>
+<body>
+    <h1>Flask JSON Example</h1>
+    <textarea id="jsonInput" rows="4" cols="50"></textarea><br>
+    <button onclick="sendJSON()">Send JSON</button>
+
+    <script>
+        function sendJSON() {
+            textBox = document.getElementById("jsonInput").value;
+            var jsonData = {symbol: textBox, date: "2025-03-29"}
+            console.log(jsonData.text)
+
+            fetch('http://127.0.0.1:5055/process_json', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
